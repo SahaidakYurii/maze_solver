@@ -142,7 +142,7 @@ class Maze:
     def reset(self):
         """Resets the maze by removing all "path" and "tried" tokens."""
         for row in range(self.num_rows()):
-            for col in range(self.num_rows()):
+            for col in range(self.num_cols()):
                 if self._maze_cells[row, col] in (self.PATH_TOKEN, self.TRIED_TOKEN):
                     self._maze_cells[row, col] = None
 
