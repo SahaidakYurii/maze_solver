@@ -47,6 +47,9 @@ class Maze:
         """
         head = stc._top
 
+        if head is None:
+            stc.push(move)
+            return
         if head.item == move:
             return
         while head.next:
@@ -80,7 +83,7 @@ class Maze:
         self._mark_tried(self._start_cell.row, self._start_cell.col)
 
         for move in self.__get_moves(path.peek()[0], path.peek()[1]):
-            moves.push(move)
+            self.__smart_push_to_stack(move, moves)
 
         # if it is possible to make a move
         while moves:
@@ -104,10 +107,7 @@ class Maze:
 
             if pos_moves:
                 for move in pos_moves:
-                    if not moves:
-                        moves.push(move)
-                    else:
-                        self.__smart_push_to_stack(move, moves)
+                    self.__smart_push_to_stack(move, moves)
 
             # if it is impossible to make a move deletes cells from path
             # till reaches the cell of last crossroad
